@@ -43,9 +43,6 @@ class Resource(object):
     def __init__(self):
         self.resource_color = set(['any'])
 
-    # def eval(self, stack, zones):
-        # pass
-
 
 class FireResource(Resource):
     def __init__(self):
@@ -145,6 +142,9 @@ class GluttonousOgre(Card):
 
 class GoblinReproducer(Card):
     '''
+    When this comes into play,
+    Pay F to make a copy of this.
+
     Set up our game with 5 Fires on the stack.
     >>> game = Game()
     >>> game.stack = [FireResource()]*5
@@ -191,4 +191,3 @@ class GoblinReproducer(Card):
         zones['inplay'].append(self)
 
         return reproduced
-
