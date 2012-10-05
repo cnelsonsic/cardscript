@@ -4,6 +4,8 @@ cardscript
 A scriptable, event-driven card game processing engine.
 -------------------------------------------------------
 
+[![Build Status](https://secure.travis-ci.org/cnelsonsic/cardscript.png)](http://travis-ci.org/cnelsonsic/cardscript)
+
 Presuming a card game where there is a resource that is produced somehow,
 that powers all the effects a card can take.
 
