@@ -1,1 +1,1 @@
-from cardscript import *
+from .cardscript import *
