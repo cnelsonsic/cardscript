@@ -16,13 +16,7 @@ In order to play a creature, the following must occur:
     The resources are destroyed as part of the creature's script.
 '''
 
-
-class InvalidResource(Exception):
-    pass
-
-
-class InvalidStackEntry(Exception):
-    pass
+import abilities
 
 
 class Game(object):
@@ -37,17 +31,6 @@ class Game(object):
             item = self.stack.pop()
             results[item] = item.eval(self.stack, self.zones)
         return results
-
-class Resource(object):
-    '''Resources are the ephemeral energy that sits on the stack.'''
-    def __init__(self):
-        self.resource_color = set(['any'])
-
-
-class FireResource(Resource):
-    def __init__(self):
-        super(FireResource, self).__init__()
-        self.resource_color.add('fire')
 
 
 class Card(object):
@@ -66,21 +49,7 @@ class Card(object):
         return
 
     def eval(self, stack, zones):
-        cost = self.cost
-        while cost:
-            thisitem = stack[-1]
-            # If it's a resource and it has a color we need...
-            if isinstance(thisitem, Resource):
-                if set(cost) & thisitem.resource_color:
-                    # Remove it from the stack and the cost of this card.
-                    cost.remove(list(set(cost) & thisitem.resource_color)[0])
-                    # And remove it from the stack.
-                    stack.remove(thisitem)
-                else:
-                    # Got something unexpected, probably the wrong color of resource.
-                    raise InvalidResource("Top of stack was {0}, needed one of {1}".format(thisitem.resource_color, cost))
-            else:
-                raise InvalidStackEntry("Top of stack was not a Resource.")
+        abilities.pay(self.cost, stack)
 
         # Total cost was paid, so call its on_play.
         return self.on_play(stack, zones)
@@ -105,6 +74,7 @@ class GluttonousOgre(Card):
     >>> game = Game()
 
     The stack has 5 fire resources, enough to pay for this.
+    >>> from resources import FireResource
     >>> game.stack = [FireResource()]*5
 
     And nothing's in play.
@@ -146,6 +116,7 @@ class GoblinReproducer(Card):
     Pay F to make a copy of this.
 
     Set up our game with 5 Fires on the stack.
+    >>> from resources import FireResource
     >>> game = Game()
     >>> game.stack = [FireResource()]*5
 
