@@ -1,10 +1,15 @@
 
 from resources import Resource
-from exceptions import InvalidResource, InvalidStackEntry
+from exceptions import InvalidResource, InvalidStackEntry, StackUnderflow
 
 def pay(cost, stack):
+    '''Pay (?P<cost>.*)'''
     while cost:
-        thisitem = stack[-1]
+        if stack:
+            thisitem = stack[-1]
+        else:
+            raise StackUnderflow("Nothing on the stack.")
+
         # If it's a resource and it has a color we need...
         if isinstance(thisitem, Resource):
             if set(cost) & thisitem.resource_color:
@@ -20,11 +25,14 @@ def pay(cost, stack):
     return stack
 
 def copy_card(this, cost, stack):
-    # If there is enough resources on the stack...
+    '''Pay (?P<cost>.*) and make a copy of (?P<this>.*).'''
+    # If there are enough resources on the stack to pay the cost...
     try:
-        if 'fire' in stack[-1].resource_color:
-            # Append a new goblin for free.
-            stack.append(this.__class__(cost=[]))
-    except (AttributeError, IndexError):
-        return stack
+        pay(cost, stack)
+    except StackUnderflow:
+        return False
+
+    # Append a new goblin for free.
+    stack.append(this.__class__(cost=[]))
+    return True
 

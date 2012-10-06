@@ -113,23 +113,24 @@ class GluttonousOgre(Card):
 class GoblinReproducer(Card):
     '''
     When this comes into play,
-    Pay F to make a copy of this.
+    Pay F and make a copy of this.
 
     Set up our game with 5 Fires on the stack.
     >>> from resources import FireResource
     >>> game = Game()
-    >>> game.stack = [FireResource()]*5
+    >>> game.stack = [FireResource()]*2
 
     Let's play our goblin this time.
-    >>> game.stack.append(GoblinReproducer())
+    >>> goblin = GoblinReproducer()
+    >>> game.stack.append(goblin)
 
     When we evaluate the stack, it will empty and suddenly there
-    will be 5 Goblin Reproducers in play.
+    will be 2 Goblin Reproducers in play.
     >>> _ = game.eval_stack()
     >>> game.stack
     []
     >>> game.zones['inplay']
-    [Card(Goblin Reproducer), Card(Goblin Reproducer), Card(Goblin Reproducer), Card(Goblin Reproducer), Card(Goblin Reproducer)]
+    [Card(Goblin Reproducer), Card(Goblin Reproducer)]
     '''
     name = "Goblin Reproducer"
 
@@ -141,22 +142,8 @@ class GoblinReproducer(Card):
 
     def on_play(self, stack, zones):
         '''When its played, it copies itself!
-
-        When this comes into play,
-        Spend a fire resource to make a copy of this.
         '''
-        reproduced = False
-        try:
-            # If there is a fire resource next on the stack...
-            if 'fire' in stack[-1].resource_color:
-                # Spend the resource.
-                stack.pop()
-                # Append a new goblin for free.
-                stack.append(GoblinReproducer(cost=[]))
-                reproduced = True
-        except (AttributeError, IndexError):
-            # The top of the stack was not a resource, or was empty.
-            pass
+        reproduced = abilities.copy_card(self, ['fire'], stack)
 
         # Done reproducing, so put this into play.
         zones['inplay'].append(self)

@@ -4,3 +4,7 @@ class InvalidResource(Exception):
 
 class InvalidStackEntry(Exception):
     pass
+
+
+class StackUnderflow(Exception):
+    pass
