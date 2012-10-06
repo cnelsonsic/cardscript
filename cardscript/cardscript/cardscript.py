@@ -16,7 +16,7 @@ In order to play a creature, the following must occur:
     The resources are destroyed as part of the creature's script.
 '''
 
-import abilities
+from . import abilities
 
 
 class Game(object):

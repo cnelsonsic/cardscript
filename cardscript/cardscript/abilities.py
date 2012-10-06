@@ -1,6 +1,6 @@
 
-from resources import Resource
-from exceptions import InvalidResource, InvalidStackEntry, StackUnderflow
+from .resources import Resource
+from .exceptions import InvalidResource, InvalidStackEntry, StackUnderflow
 
 def pay(cost, stack):
     '''Pay (?P<cost>.*)'''
