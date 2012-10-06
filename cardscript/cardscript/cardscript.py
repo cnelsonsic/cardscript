@@ -74,7 +74,7 @@ class GluttonousOgre(Card):
     >>> game = Game()
 
     The stack has 5 fire resources, enough to pay for this.
-    >>> from resources import FireResource
+    >>> from .resources import FireResource
     >>> game.stack = [FireResource()]*5
 
     And nothing's in play.
@@ -116,7 +116,7 @@ class GoblinReproducer(Card):
     Pay F and make a copy of this.
 
     Set up our game with 5 Fires on the stack.
-    >>> from resources import FireResource
+    >>> from .resources import FireResource
     >>> game = Game()
     >>> game.stack = [FireResource()]*2
 
