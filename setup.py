@@ -1,4 +1,5 @@
 from distutils.core import setup
+from sh import pandoc
 
 setup(
     name='cardscript',
@@ -9,7 +10,7 @@ setup(
     url="https://github.com/cnelsonsic/cardscript",
     packages=['cardscript', 'cardscript.cards'],
     license='AGPLv3+',
-    long_description=open('README.md').read(),
+    long_description='\n'.join(pandoc('README.md', t='rst')),
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
