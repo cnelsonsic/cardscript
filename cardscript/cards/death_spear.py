@@ -49,10 +49,8 @@ class DeathSpear(Card):
             # Get the topmost card in play
             discarded_card = zones['inplay'].pop()
 
-            # Then trigger a "death" event.
-            # This also moves it to the discard pile,
-            # and triggers the on_discarded event.
-            discarded_card.on_discarding(stack, zones)
+            # And discard it.
+            abilities.discard(discarded_card)
 
             count += 1
 

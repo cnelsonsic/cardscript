@@ -36,3 +36,9 @@ def copy_card(this, cost, stack):
     stack.append(this.__class__(cost=[]))
     return True
 
+def discard(target, stack, zones):
+    # Trigger a "discard" event.
+    # This also removes it from 'inplay', moves it to the discard pile,
+    # and triggers the on_discarded event.
+    target.on_discarding(stack, zones)
+
