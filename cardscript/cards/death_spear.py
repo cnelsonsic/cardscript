@@ -50,7 +50,7 @@ class DeathSpear(Card):
             discarded_card = zones['inplay'].pop()
 
             # And discard it.
-            abilities.discard(discarded_card)
+            abilities.discard(discarded_card, stack, zones)
 
             count += 1
 
