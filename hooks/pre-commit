@@ -1,0 +1,13 @@
+#!/bin/bash
+# Run all scripts in the hooks directory, and exit if any error.
+set -e
+for SCRIPT in $(git rev-parse --show-toplevel)/hooks/*
+  do
+      if [ -f $SCRIPT -a -x $SCRIPT ]
+      then
+          if [ $(readlink "$0") != $SCRIPT ]
+          then
+            $SCRIPT
+          fi
+      fi
+  done

@@ -1,8 +1,6 @@
-cardscript
-==========
+# cardscript
 
-A scriptable, event-driven card game processing engine.
--------------------------------------------------------
+## A scriptable, event-driven card game processing engine.
 
 [![Build Status](https://secure.travis-ci.org/cnelsonsic/cardscript.png)](http://travis-ci.org/cnelsonsic/cardscript)
 
@@ -23,3 +21,9 @@ resources from the stack to satisfy its resource requirements.
 Now, the stack is empty.
 The creature is placed into the zone known as "in play".
 The resources are destroyed as part of the creature's script.
+
+## Development
+
+### Hooks
+Run ``python ./hooks/bootstrap.py`` to bootstrap your clone with the pre-commit hooks for this project.
+You can find them in the ``hooks`` directory.
