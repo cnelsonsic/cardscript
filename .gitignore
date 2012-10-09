@@ -18,8 +18,10 @@ MANIFEST
 pip-log.txt
 
 # Unit test / coverage reports
+nosetests.xml
 .coverage
 .tox
+htmlcov
 
 #Translations
 *.mo
