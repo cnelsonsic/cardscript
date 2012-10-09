@@ -19,7 +19,7 @@ def pay(cost, stack):
                 stack.remove(thisitem)
             else:
                 # Got something unexpected, probably the wrong color of resource.
-                raise InvalidResource("Top of stack was {0}, needed one of {1}".format(thisitem.resource_color, cost))
+                raise InvalidResource("Top of stack was {0}, needed one of {1}".format(cost, thisitem.resource_color))
         else:
             raise InvalidStackEntry("Top of stack was not a Resource.")
     return stack
@@ -29,7 +29,7 @@ def copy_card(this, cost, stack):
     # If there are enough resources on the stack to pay the cost...
     try:
         pay(cost, stack)
-    except StackUnderflow:
+    except (StackUnderflow, InvalidResource, InvalidStackEntry):
         return False
 
     # Append a new goblin for free.

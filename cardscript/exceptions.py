@@ -8,3 +8,7 @@ class InvalidStackEntry(Exception):
 
 class StackUnderflow(Exception):
     pass
+
+
+class MaximumRecursionReached(Exception):
+    pass

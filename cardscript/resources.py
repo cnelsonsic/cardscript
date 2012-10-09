@@ -8,3 +8,8 @@ class FireResource(Resource):
     def __init__(self):
         super(FireResource, self).__init__()
         self.resource_color.add('fire')
+
+class EvilResource(Resource):
+    def __init__(self):
+        super(EvilResource, self).__init__()
+        self.resource_color.add('evil')
